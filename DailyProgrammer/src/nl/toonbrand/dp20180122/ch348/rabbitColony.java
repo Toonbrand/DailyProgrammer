@@ -9,12 +9,13 @@ package nl.toonbrand.dp20180122.ch348;
  *
  */
 public class rabbitColony {
-	int[] males = new int[96], females = new int[96];		//rabbits live to be 96 years old
+	long[] males = new long[96], females = new long[96];		//rabbits live to be 96 years old
 	static final int FERTILE_AGE = 4;						//rabbits are fertile from 4 months old
-	int month, rabbitsNeeded, deadRabbits;
+	int month, deadRabbits;
+	long rabbitsNeeded;
 
 	public static void main(String[] args) {
-		rabbitColony colony = new rabbitColony(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+		rabbitColony colony = new rabbitColony(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Long.parseLong(args[2]));
 
 		while(!colony.worldDomination()){
 			colony.progress();
@@ -22,15 +23,15 @@ public class rabbitColony {
 		}
 	}
 
-	public rabbitColony (int maleRabbits, int femaleRabbits, int rabbitsNeeded){
+	public rabbitColony (int maleRabbits, int femaleRabbits, long rabbitsNeeded){
 		this.males[2]=maleRabbits;
 		this.females[2]=femaleRabbits;
 		this.rabbitsNeeded = rabbitsNeeded;
 	}
 
 	private void progress(){
-		int newMales = 0;
-		int newFemales = 0;
+		long newMales = 0;
+		long newFemales = 0;
 
 		// Calculate and save how many new rabbits are born
 		for(int i=0;i<females.length;i++){
@@ -58,17 +59,17 @@ public class rabbitColony {
 	}
 
 	public boolean worldDomination(){
-		int totalMales = 0;
-		int totalFemales = 0;
+		long totalMales = 0;
+		long totalFemales = 0;
 
-		for(int alive : males){
+		for(long alive : males){
 			totalMales += alive;
 		}
-		for(int alive : females){
+		for(long alive : females){
 			totalFemales += alive;
 		}
 
-		// Log the progress to world domination
+		// Log the progress towards world domination
 		System.out.println("Month: " + month);
 		System.out.println("Total males:   " + totalMales);
 		System.out.println("Total females: " + totalFemales);
